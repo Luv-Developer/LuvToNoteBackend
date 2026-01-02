@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuvToNote - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "/stylesheets/profile.css">
+    <link rel = "icon" type = "image/icon" href = "/images/notes.png">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="floating-note"></div>
+        <div class="floating-note"></div>
+        <div class="floating-note"></div>
+        <div class="floating-note"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-sticky-note"></i>
+            LuvTo<span>Note</span>
+        </a>
+        <div class="nav-buttons">
+            <a href = "/">
+            <button class="nav-btn btn-home">
+                <i class="fas fa-home"></i>
+                Home
+            </button>
+            </a>
+            <a href = "/create">
+            <button class="nav-btn btn-notes">
+                <i class="fas fa-book"></i>
+                Create Notes
+            </button>
+            </a>
+            <a href = "/allnotes">
+            <button class="nav-btn btn-notes">
+                <i class="fas fa-book"></i>
+                Your Notes
+            </button>
+            </a>
+            <a href = "/signout">
+            <button class="nav-btn btn-signout" id="signoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Sign Out
+            </button>
+        </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 class="welcome-title" id="usernameTitle">Welcome, <%=   username  %></h1>
+            <p class="welcome-subtitle">Your personal dashboard for notes, productivity, and organization</p>
+        </div>
+
+        <!-- Profile Content -->
+        <div class="profile-content">
+            <!-- Left Column - Profile Card -->
+            <div class="profile-card">
+                <div class="avatar-container">
+                    <img src="<%=  picture  %>" 
+                         class="avatar">
+                    <div class="online-status"></div>
+                </div>
+                
+                <h2 class="profile-name"><%=  username  %></h2>
+                <div class="profile-role">Premium User</div>
+                
+                <!-- Rating -->
+                <div class="rating-container">
+                    <div class="rating-stars" id="ratingStars">
+                    </div>
+                    <div class="rating-value">4.8</div>
+                    <div class="rating-label">User Rating</div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalNotes"><%= totalnotes  %></div>
+                        <div class="stat-label">Total Notes</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Info Section -->
+            <div class="info-section">
+                <!-- User Information -->
+                <div class="info-card">
+                    <h2><i class="fas fa-user-circle"></i> User Information</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-label">Email Address</div>
+                            <div class="info-value"><%=  email  %></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Member Since</div>
+                            <div class="info-value"><%=  date   %></div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Account Type</div>
+                            <div class="info-value">Premium</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">Subscription Status</div>
+                            <div class="info-value">
+                                <span style="color: var(--secondary);">Active</span>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                    </div>
+                </div>
+            <a href = "/create">
+            <button class="nav-btn btn-notes">
+                <i class="fas fa-book"></i>
+                Create Notes
+            </button>
+            </a>
+            <br><br>
+
+                <!-- Recent Notes -->
+                <div class="info-card">
+                    <h2><i class="fas fa-file-alt"></i> Recent Notes</h2>
+                    <div class="notes-grid" id="recentNotes">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 LuvToNote. All rights reserved. | Your digital notebook for everything important</p>
+    </footer>
+    <script src = "/javascripts/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuvToNote - Edit Note</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel = "stylesheet" type = "text/css" href = "/stylesheets/edit.css">
+    <link rel = "icon" type = "image/icon" href = "/images/notes.png">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Animated Pens -->
+    <div class="floating-pens">
+        <div class="floating-pen"><i class="fas fa-pen"></i></div>
+        <div class="floating-pen"><i class="fas fa-pencil-alt"></i></div>
+        <div class="floating-pen"><i class="fas fa-highlighter"></i></div>
+        <div class="floating-pen"><i class="fas fa-marker"></i></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <i class="fas fa-sticky-note"></i>
+            LuvTo<span>Note</span>
+        </a>
+        <div class="nav-buttons">
+            <a href = "/allnotes">
+            <button class="nav-btn btn-allnotes" id="allNotesBtn">
+                <i class="fas fa-book"></i>
+                All Notes
+            </button>
+            </a>
+            <a href = "/profile">
+            <button class="nav-btn btn-profile" id="profileBtn">
+                <i class="fas fa-user-circle"></i>
+                Your Profile
+            </button>
+            </a>
+            <a href = "/signout">
+            <button class="nav-btn btn-signout" id="signoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+                Sign Out
+            </button>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Edit Your Note</h1>
+            <p class="page-subtitle">Revise and perfect your thoughts. Every edit brings your ideas closer to perfection.</p>
+        </div>
+
+        <!-- Edit Form Container -->
+        <div class="edit-form-container">
+            <!-- Left Side - Edit Form -->
+            <div class="edit-form-section">
+                <div class="form-card">
+                    <div class="form-header">
+                        <div class="form-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h2 class="form-title">Edit Note Details</h2>
+                    </div>
+
+                    <form action = "/edit" method = "post" id="editNoteForm">
+                        <div class="form-group">
+                            <label class="form-label" for="noteTitle">
+                                <i class="fas fa-heading"></i>
+                                Note Title
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-pen input-icon"></i>
+                                <input name = "newtitle" value = "<%=  title  %>" type="text" id="noteTitle" class="form-input" 
+                                       placeholder="Enter a new title for your note" 
+                                       maxlength="100" required>
+                            </div>
+                            <div class="character-count" id="titleCount">
+                                0/100 characters
+                            </div>
+                        </div>
+
+                        <!-- Note Content -->
+                        <div class="form-group">
+                            <label class="form-label" for="noteContent">
+                                <i class="fas fa-align-left"></i>
+                                Note Content
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-sticky-note input-icon"></i>
+                                <textarea name = "newnote" id="noteContent" class="form-input" 
+                                          placeholder="<%= note  %>"
+                                                    
+You can format your text:
+• Use *emphasis* for italics
+• Use **bold** for strong text
+• Use # for headings
+• Use - for bullet points
+• Add links: [text](url)" 
+                                          maxlength="5000" required></textarea>
+                            </div>
+                            <div class="character-count" id="contentCount">
+                                0/5000 characters
+                            </div>
+                        </div>
+                        <!-- Save Button -->
+                        <div class="save-button-container">
+                            <button type="submit" class="save-button" id="saveBtn">
+                                <i class="fas fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+                        <input style="visibility: hidden;" type = "text" name = "prevtitle" value = "<%= title  %>">
+                    </form>
+                </div>
+
+                <!-- Original Note Info -->
+                <div class="original-note-info">
+                    <h4>
+                        <i class="fas fa-history"></i>
+                        Original Note Information
+                    </h4>
+                    <div class="original-meta">
+                        <div class="original-meta-item">
+                            <i class="far fa-calendar"></i>
+                            Created: <span id="originalDate"><%=  date  %></span>
+                        </div>
+                        <div class="original-meta-item">
+                            <i class="fas fa-file-alt"></i>
+                            Characters: <span id="originalCharCount"><%= length  %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Side - Preview -->
+            <div class="preview-section">
+                <div class="preview-card">
+                    <div class="preview-header">
+                        <div class="preview-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h2 class="preview-title">Live Preview</h2>
+                    </div>
+
+                    <div class="note-preview">
+                        <div class="preview-placeholder" id="previewPlaceholder">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Your Edited Note Preview</h3>
+                            <p>Start editing to see a live preview of your updated note here.</p>
+                        </div>
+
+                        <div class="note-preview-content" id="notePreview">
+                            <div class="note-preview-header">
+                                <h3 class="preview-note-title" id="previewTitle">Edited Note Title</h3>
+                                <div class="preview-note-meta">
+                                    <span class="preview-note-category" id="previewCategory">Category</span>
+                                    <span class="preview-note-date">
+                                        <i class="far fa-calendar"></i>
+                                        <span id="previewDate">Just now</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="preview-note-body" id="previewContent">
+                                <!-- Note content will appear here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle notification-icon"></i>
+            <span id="notificationMessage">Changes saved successfully!</span>
+        </div>
+        <button class="notification-close" id="closeNotification">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>© 2026 LuvToNote. All rights reserved. | Capture ideas, organize thoughts, boost productivity</p>
+
+    </footer>
+</body>
+</html>
