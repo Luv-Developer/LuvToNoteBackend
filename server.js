@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname,"public")))
 app.set("view engine","ejs")
 app.use(express.urlencoded({extended:true}))
 app.use(cors({
-    origin:"http://localhost:5173",
+    origin:"https://luvtonotef.vercel.app",
     methods:["GET","POST"],
     credentials:true
 }))
@@ -77,7 +77,7 @@ app.post("/signin",async(req,res)=>{
         }
     }
     catch(err){
-        return res.status(500).redirect("/http://localhost:5173/signin")
+        return res.status(500).redirect("https://luvtonotef.vercel.app/signin")
     }
 })
 
@@ -86,7 +86,7 @@ const issignedin = (req,res,next) => {
     let token = req.cookies.token
     try{
         if(!token){
-            return res.redirect("http://localhost:5173/signin")
+            return res.redirect("https://luvtonotef.vercel.app/signin")
         }
         else{
             let data = jwt.verify(token,SECRETKEY)
@@ -95,7 +95,7 @@ const issignedin = (req,res,next) => {
         }
     }
     catch(err){
-        return res.redirect("/http://localhost:5173/signin")
+        return res.redirect("https://luvtonotef.vercel.app/signin")
     }
 } 
 
@@ -120,7 +120,7 @@ app.get("/profile",issignedin,async(req,res)=>{
 // Logout Route 
 app.get("/signout",(req,res)=>{
     res.cookie("token","")
-    return res.redirect("http://localhost:5173/signin")
+    return res.redirect("https://luvtonotef.vercel.app/signin")
 })
 app.get("/create",issignedin,(req,res)=>{
     res.render("create")
